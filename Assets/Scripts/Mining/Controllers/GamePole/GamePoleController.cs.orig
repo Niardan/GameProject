@@ -1,0 +1,347 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using Assets.Scripts.Mining.Views;
+using Assets.Scripts.ViewDescription;
+using UnityEngine;
+
+namespace Assets.Scripts.Mining.Controllers.GamePole
+{
+    public delegate BallController GetBallHandler(BallPoint position);
+    public class GamePoleController
+    {
+        private readonly GamePoleView _gamePole;
+
+        private readonly BallController[,] _balls;
+        private readonly BallPool _ballPool;
+        private readonly TypeBall _typeBallResource;
+        private readonly int _countColor;
+        private readonly float _percentageResources;
+        private readonly ResourcesCount _resources;
+        private readonly GenerateBalls _generateBalls;
+        private readonly BallSpritesViewDescription _spritesViewDescription;
+        private readonly CheckBall _checkBall;
+
+        private MoveReverce _oneReverce;
+        private MoveReverce _twoReverce;
+        private bool _reverce = false;
+        private bool _fallChanged = false;
+        private GetBallHandler _getBall;
+
+        public GamePoleController(GamePoleView gamePole, BallPool ballPool, BallSpritesViewDescription spritesViewDescription, TypeBall typeBallResource, int countColor, float percentageResources, ResourcesCount resources)
+        {
+            _gamePole = gamePole;
+            _ballPool = ballPool;
+            _typeBallResource = typeBallResource;
+            _countColor = countColor;
+            _percentageResources = percentageResources;
+            _resources = resources;
+            _spritesViewDescription = spritesViewDescription;
+            _gamePole.Activate();
+            _checkBall = new CheckBall(new BallPoint(gamePole.CountHorCell, gamePole.CountVertCell));
+            _generateBalls = new GenerateBalls(new BallPoint(_gamePole.CountHorCell, _gamePole.CountVertCell), typeBallResource, countColor, percentageResources, resources, _ballPool);
+            _balls = new BallController[gamePole.CountHorCell, gamePole.CountVertCell];
+
+            _generatedBall = _generateBalls.GenerateAll();
+            _getBall = GetGeneratedBall;
+        _checkGameController.Checked()
+
+        pri        lController[] GetLine(BallController[,] balls, int indexLine)
+        {
+            var ballLine = new BallController[balls.GetLength(0)];
+            for (int x = 0; x < balls.GetLength(0); x++)
+            {
+                ballLine[x] = balls[x, indexLine];
+            }
+            return ballLine;
+        }
+
+
+        private void FallAllBall()
+        {
+            _fallChanged = false;
+            for (int y = _balls.GetLength(1) - 1; y >= 0; y--)
+            {
+                for (int x = 0; x < _balls.GetLength(0); x++)
+                {
+                    var ball = _balls[x, y];
+                    if (ball != null)
+                    {
+                        if (FallBall(ball))
+                        {
+                            _fallChanged = true;
+                        }
+                    }
+                }
+            }
+            CheckNullLine();
+
+            if (!_fallChanged)
+            {
+                CheckAllBall();
+            }
+        }
+
+        private bool FallBall(BallController ball)
+        {
+            int x = ball.Positinon.X;
+            int y = ball.Positinon.Y;
+            y++;
+            if (y < _balls.GetLength(1))
+            {
+                var newball = _balls[x, y];
+                if (newball == null)
+                {
+                    var newY = y - 1;
+                    _balls[x, newY] = null;
+                    _balls[x, y] = ball;
+                    ball.BallAnimationEnd += OnBallAnimationEndFailedComplete;
+                    _movedBall++;
+                    Move(ball, x, y);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void OnBallAnimationEndFailedComplete(BallController ball)
+        {
+            ball.BallAnimationEnd -= OnBallAnimationEndFailedComplete;
+            _movedBall--;
+            if (_movedBall == 0)
+            {
+                if (_fallChanged || CheckNullAll())
+                {
+                    _fallChanged = false;
+                    FallAllBall();
+                }
+
+            }
+        }
+
+        private void GenBall(BallController ball, int xPosition, int yPosition)
+        {
+            if (_balls[xPosition, yPosition] == null)
+            {
+                _gamePole.AddBall(ball.View);
+                ball.Positinon = new BallPoint(xPosition, yPosition);
+                var genPosition = _gamePole.GetCoordPoints(xPosition, yPosition);
+
+                ball.View.Ball.anchoredPosition = new Vector2(genPosition.x, genPosition.y + 80);
+                ball.SetSprite(_spritesViewDescription.GetSprite(ball.TypeBall, ball.TypeResources != null));
+                _balls[xPosition, yPosition] = ball;
+                ball.View.SetActive(true);
+                ball.BallMove(genPosition, xPosition, yPosition);
+                ball.BallMoved += OnBallMoved;
+            }
+        }
+
+        private void OnBallMoved(BallController ball, MoveSide side)
+        {
+
+            int x = ball.Positinon.X;
+            int y = ball.Positinon.Y;
+            int newX = x;
+            int newY = y;
+            bool moved = false;
+            switch (side)
+            {
+                cas_checkGameController.Checked();       newY++;
+                    if (newY < _gamePole.CountVertCell)
+                    {
+                        moved = true;
+                    }
+                    break;
+                case MoveSide.Left:
+                    newX--;
+                    if (newX >= 0)
+                    {
+                        moved = true;
+                    }
+                    break;
+                case MoveSide.Right:
+                    newX++;
+                    if (newX < _gamePole.CountHorCell)
+                    {
+                        moved = true;
+                    }
+                    break;
+                case MoveSide.Up:
+                    newY--;
+                    if (newY >= 0)
+                    {
+                        moved = true;
+                    }
+                    break;
+
+            }
+            if (moved)
+            {
+                var newBall = _balls[newX, newY];
+                _balls[newX, newY] = ball;
+                _balls[x, y] = newBall;
+                if (newBall != null)
+                {
+                    _oneReverce = new MoveReverce(ball);
+                    _twoReverce = new MoveReverce(newBall);
+                    ball.BallAnimationEnd += OnBallAnimationEnd;
+                    newBall.BallAnimationEnd += OnBallAnimationEnd;
+                    Move(ball, newX, newY);
+                    _movedBall++;
+                    Move(newBall, x, y);
+                    _movedBall++;
+                    _reverce = true;
+                }
+            }
+        }
+
+        private void OnBallAnimationEnd(BallController ball)
+        {
+            ball.BallAnimationEnd -= OnBallAnimationEnd;
+            _movedBall--;
+            if (_checkBall.CheckChangedBall(ball, _balls))
+            {
+                _reverce = false;
+            }
+            if (_movedBall == 0)
+            {
+                if (_reverce)
+                {
+                    ReverceMove();
+                    _reverce = false;
+                }
+                else
+                {
+                    DestroyAllBall();
+                }
+            }
+        }
+
+        private bool CheckNullLine()
+        {
+            bool check = false;
+            for (int i = 0; i < _balls.GetLength(0); i++)
+            {
+                if (_balls[i, 0] == null)
+                {
+                    _balls[i, 0] = _getBall(new BallPoint(i, 0));
+                    check = true;
+                }
+            }
+            if (check && !_fallChanged)
+                FallAllBall();
+            return check;
+        }
+
+        private void CheckAllBall()
+        {
+            bool changed = false;
+            for (int y = _balls.GetLength(1) - 1; y >= 0; y--)
+            {
+                for (int x = 0; x < _balls.GetLength(0); x++)
+                {
+                    var ball = _balls[x, y];
+                    if (ball == null)
+                    {
+                        FallAllBall();
+                    }
+                    else if (ball.IsChanged)
+                    {
+                        if (_checkBall.CheckChangedBall(ball, _balls))
+                        {
+                            changed = true;
+                        }
+                    }
+
+                }
+            }
+            if (changed)
+            {
+                DestroyAllBall();
+            }
+        }
+
+        private bool CheckNullAll()
+        {
+            foreach (var ball in _balls)
+            {
+                if (ball == null)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private BallController GetGeneratedBall(BallPoint position)
+        {
+            int x = position.X;
+            int y = _generatedBall.GetLength(1) - 1;
+            BallController ball;
+            do
+            {
+                ball = _generatedBall[x, y];
+                _generatedBall[x, y] = null;
+                y--;
+            } while (ball == null);
+            _movedBall++;
+            ball.BallAnimationEnd += OnBallAnimationEndFailedComplete;
+            GenBall(ball, position.X, position.Y);
+            return ball;
+        }
+
+        private BallController GetNewBall(BallPoint position)
+        {
+            var ball = _generateBalls.GenerateRandomBall(position);
+            GenBall(ball, position.X, position.Y);
+            return ball;
+        }
+
+        private void DestroyAllBall()
+        {
+            bool isDestroy = false;
+            for (int y = _balls.GetLength(1) - 1; y >= 0; y--)
+            {
+                for (int x = 0; x < _balls.GetLength(0); x++)
+                {
+                    var ball = _balls[x, y];
+                    if (ball != null && ball.IsDestroed)
+                    {
+                        isDestroy = true;
+                        ball.BallDestroedEnd += Ball_BallDestroedEnd;
+                        DestroyBall(ball);
+                    }
+                }
+            }
+            _getBall = GetNewBall;
+            FallAllBall();
+        }
+
+        private void Ball_BallDestroedEnd(BallController ball)
+        {
+           
+        }
+
+        private void DestroyBall(BallController ball)
+        {
+            ball.BallMoved -= OnBallMoved;
+            _balls[ball.Positinon.X, ball.Positinon.Y] = null;
+            _ballPool.FreeBall = ball.View;
+        }
+
+        private void ReverceMove()
+        {
+            _balls[_oneReverce.Point.X, _oneReverce.Point.Y] = _oneReverce.Ball;
+            _balls[_twoReverce.Point.X, _twoReverce.Point.Y] = _twoReverce.Ball;
+            Move(_oneReverce.Ball, _oneReverce.Point.X, _oneReverce.Point.Y);
+            Move(_twoReverce.Ball, _twoReverce.Point.X, _twoReverce.Point.Y);
+
+        }
+
+
+        private void Move(BallController ball, int x, int y)
+        {
+            var koord = _gamePole.GetCoordPoints(x, y);
+            ball.BallMove(koord, x, y);
+        }
+    }
+}
