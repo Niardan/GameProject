@@ -20,6 +20,8 @@ public class GamePoleView : MonoBehaviour
 
     public void AddBall(BallView ball)
     {
+	    var position = ball.Ball.localPosition;
+		ball.Ball.localPosition = new Vector3(position.x, position.y, _rectDesck.position.z);
         ball.transform.SetParent(_rectDesck);
     }
 
