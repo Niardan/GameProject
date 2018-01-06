@@ -13,11 +13,11 @@
         Green = 1,
         Yellow = 2,
         Blue = 3,
-	    Aqua = 4,
+	    DarkBlue = 4,
 	    Orange = 5,
-	    Pink = 6,
+	    Purple = 6,
 	    Gray = 7,
-	    Violet = 8,
+	    Sand = 8,
 	    White = 9
 	}
     public enum TypeResources
