@@ -17,7 +17,7 @@
 	    Orange = 5,
 	    Purple = 6,
 	    Gray = 7,
-	    Sand = 8,
+	    Brown = 8,
 	    White = 9
 	}
     public enum TypeResources

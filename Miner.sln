@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miner", "Miner.csproj", "{F6AE3E16-0E0B-2D1F-2882-42B540B8249C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miner.Editor", "Miner.Editor.csproj", "{9C74D5EA-39B6-97FD-203F-728C12FD6DBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{F6AE3E16-0E0B-2D1F-2882-42B540B8249C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6AE3E16-0E0B-2D1F-2882-42B540B8249C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6AE3E16-0E0B-2D1F-2882-42B540B8249C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C74D5EA-39B6-97FD-203F-728C12FD6DBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C74D5EA-39B6-97FD-203F-728C12FD6DBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C74D5EA-39B6-97FD-203F-728C12FD6DBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C74D5EA-39B6-97FD-203F-728C12FD6DBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

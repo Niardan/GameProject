@@ -5,16 +5,16 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F6AE3E16-0E0B-2D1F-2882-42B540B8249C}</ProjectGuid>
+    <ProjectGuid>{9C74D5EA-39B6-97FD-203F-728C12FD6DBB}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Assembly-CSharp.dll</AssemblyName>
+    <AssemblyName>Assembly-CSharp-Editor.dll</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
-    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.3.0p1</UnityVersion>
     <RootNamespace></RootNamespace>
@@ -285,119 +285,48 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Basic\IIdentified.cs" />
-    <Compile Include="Assets\Scripts\Basic\ISceneView.cs" />
-    <Compile Include="Assets\Scripts\Mining\Controllers\GameMiningController.cs" />
-    <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\BallController.cs" />
-    <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\BallPoint.cs" />
-    <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\CheckBall.cs" />
-    <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\GamePoleController.cs" />
-    <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\GameProcess\CheckChangedBallController.cs" />
-    <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\GameProcess\DestroyControllerBall.cs" />
-    <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\GameProcess\FallControllerBall.cs" />
-    <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\GameProcess\GamePoleStateControler.cs" />
-    <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\GameProcess\MovedController.cs" />
-    <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\GameProcess\NewGenerateController.cs" />
-    <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\GameTimer.cs" />
-    <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\GenerateBalls.cs" />
-    <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\MoveReverce.cs" />
-    <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\MoveSide.cs" />
-    <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\ResourcesCount.cs" />
-    <Compile Include="Assets\Scripts\Mining\Controllers\HintControler.cs" />
-    <Compile Include="Assets\Scripts\Mining\Views\BallPool.cs" />
-    <Compile Include="Assets\Scripts\Mining\Views\GameMiningView.cs" />
-    <Compile Include="Assets\Scripts\Mining\Views\GamePole\BallView.cs" />
-    <Compile Include="Assets\Scripts\Mining\Views\GamePole\GamePoleView.cs" />
-    <Compile Include="Assets\Scripts\Mining\Views\HintView.cs" />
-    <Compile Include="Assets\Scripts\Mining\Views\MoveAnimator.cs" />
-    <Compile Include="Assets\Scripts\Mining\Views\SidePointerObject.cs" />
-    <Compile Include="Assets\Scripts\Mining\Views\SimpleView.cs" />
-    <Compile Include="Assets\Scripts\Mining\Views\UIPointerObject.cs" />
-    <Compile Include="Assets\Scripts\Unils\Now.cs" />
-    <Compile Include="Assets\Scripts\Unils\Timer.cs" />
-    <Compile Include="Assets\Scripts\ViewDescription\BallSpritesViewDescription.cs" />
-    <Compile Include="Assets\Scripts\ViewDescription\MiningSceneViewsDescription.cs" />
-    <Compile Include="Assets\Scripts\ViewDescription\ViewDescriptionListCollection.cs" />
-    <Compile Include="Assets\Scripts\ViewDescription\ViewDescriptionsCollection.cs" />
-    <Compile Include="Assets\StartGame.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\FastAction.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\MaterialReferenceManager.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TextContainer.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TextMeshPro.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TextMeshProUGUI.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_Asset.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_ColorGradient.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_Compatibility.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_CoroutineTween.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_DefaultControls.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_Dropdown.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_FontAsset.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_InputField.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_InputValidator.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_LineInfo.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_ListPool.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_MaterialManager.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_MeshInfo.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_ObjectPool.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_PhoneNumberValidator.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_ScrollbarEventHandler.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_SelectionCaret.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_Settings.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_Sprite.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_SpriteAnimator.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_SpriteAsset.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_SpriteAssetImportFormats.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_Style.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_StyleSheet.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_SubMesh.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_SubMeshUI.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_Text.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_TextElement.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_TextInfo.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_TextUtilities.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_UpdateManager.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_UpdateRegistery.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMP_XmlTagStack.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMPro_EventManager.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMPro_ExtensionMethods.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMPro_FontUtilities.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMPro_MeshUtilities.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMPro_Private.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMPro_ShaderUtilities.cs" />
-    <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMPro_UGUI_Private.cs" />
+    <ProjectReference Include="Miner.csproj">
+      <Project>{F6AE3E16-0E0B-2D1F-2882-42B540B8249C}</Project>
+      <Name>Miner</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\Property Drawers\DropdownOptionListDrawer.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\Property Drawers\GlyphInfoDrawer.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\Property Drawers\KerningPairDrawer.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\Property Drawers\SpriteInfoDrawer.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_BaseShaderGUI.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_BitmapShaderGUI.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_ColorGradientAssetMenu.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_ColorGradientEditor.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_DropdownEditor.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_EditorPanel.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_EditorUtility.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_FontAssetEditor.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_InputFieldEditor.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_MeshRendererEditor.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_PostBuildProcessHandler.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_ResourcesLoader.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_SDFShaderGUI.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_SettingsEditor.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_SpriteAssetEditor.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_SpriteAssetImporter.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_SpriteAssetMenu.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_StyleAssetMenu.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_StyleSheetEditor.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_SubMesh_Editor.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_SubMeshUI_Editor.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_UiEditorPanel.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMP_UIStyleManager.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMPro_ContextMenus.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMPro_CreateObjectMenu.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMPro_EditorShaderUtilities.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMPro_FontAssetCreatorWindow.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMPro_FontPlugin.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMPro_SDFMaterialEditor.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMPro_SortingLayerHelper.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMPro_TextContainerEditor.cs" />
+    <Compile Include="Assets\TextMesh Pro\Scripts\Editor\TMPro_TexturePostProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
