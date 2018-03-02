@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.2.0p4</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -228,6 +230,9 @@
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Scripts\Basic\IIdentified.cs" />
     <Compile Include="Assets\Scripts\Basic\ISceneView.cs" />
+    <Compile Include="Assets\Scripts\Bloks\Block.cs" />
+    <Compile Include="Assets\Scripts\Bloks\BlockPoint.cs" />
+    <Compile Include="Assets\Scripts\Bloks\Side.cs" />
     <Compile Include="Assets\Scripts\Mining\Controllers\GameMiningController.cs" />
     <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\BallController.cs" />
     <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\BallPoint.cs" />
