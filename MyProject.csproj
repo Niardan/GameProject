@@ -343,6 +343,7 @@
     <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMPro_Private.cs" />
     <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMPro_ShaderUtilities.cs" />
     <Compile Include="Assets\TextMesh Pro\Scripts\Runtime\TMPro_UGUI_Private.cs" />
+    <Compile Include="Assets\Scripts\Bloks\BlockGamePoleController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
