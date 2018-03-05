@@ -6,15 +6,17 @@
         private BlockPoint _point;
         private readonly Side _side;
         private readonly BlockPoint _sidePoint;
+        private readonly Type _type;
         private bool _moved;
 
+        public event MoveBlockHandler ClickTryMove;
         public event MoveBlockHandler TryMove;
-
         public event MoveBlockHandler Move;
-        public Block(BlockPoint point, Side side)
+        public Block(BlockPoint point, Side side, Type type)
         {
             _point = point;
             _side = side;
+            _type = type;
             switch (side)
             {
                 case Side.Down:
@@ -43,9 +45,17 @@
 
         public void Update()
         {
-            if (_moved)
+            if (_side != Side.Null && _moved)
             {
                 CallTryMove();
+            }
+        }
+
+        public void ClickMove()
+        {
+            if (!_moved)
+            {
+                CallClickTryMove();
             }
         }
 
@@ -55,7 +65,7 @@
             CallMove();
         }
 
-        protected virtual void CallTryMove()
+        private void CallTryMove()
         {
             if (TryMove != null)
             {
@@ -63,7 +73,15 @@
             }
         }
 
-        protected virtual void CallMove()
+        private void CallClickTryMove()
+        {
+            if (ClickTryMove != null)
+            {
+                ClickTryMove(this, _side, GetNewPoint());
+            }
+        }
+
+        private void CallMove()
         {
             if (Move != null)
             {
