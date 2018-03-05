@@ -6,13 +6,13 @@
         private BlockPoint _point;
         private readonly Side _side;
         private readonly BlockPoint _sidePoint;
-        private readonly Type _type;
+        private readonly BlockType _type;
         private bool _moved;
 
         public event MoveBlockHandler ClickTryMove;
         public event MoveBlockHandler TryMove;
         public event MoveBlockHandler Move;
-        public Block(BlockPoint point, Side side, Type type)
+        public Block(BlockPoint point, Side side, BlockType type)
         {
             _point = point;
             _side = side;

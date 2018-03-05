@@ -1,22 +1,21 @@
-﻿using System.Net.Mime;
-using Assets.Scripts.Mining.Views;
-using Assets.Scripts.Views.UI.Common;
+﻿using Assets.Scripts.Mining.Views;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Mining.GamePole
+namespace Assets.Scripts.Bloks.Views
 {
-    public class BallView : MonoBehaviour
+    public class BlockView : MonoBehaviour
     {
-        [SerializeField] private RectTransform _ball;
+        [SerializeField] private RectTransform _block;
         [SerializeField] private SidePointerObject _uiPointerObject;
         [SerializeField] private MoveAnimator _moveAnimator;
         [SerializeField] private Image _image;
+        [SerializeField] private Image _arrow;
         [SerializeField] private GameObject _gameObject;
         [SerializeField] private float _destroyTime;
         [SerializeField] private ParticleSystem _particleSystem;
 
-        public RectTransform Ball { get { return _ball; } }
+        public RectTransform Block { get { return _block; } }
         public SidePointerObject PointerObject { get { return _uiPointerObject; } }
         public MoveAnimator MoveAnimator { get { return _moveAnimator; } }
         public Image Image { get { return _image; } }

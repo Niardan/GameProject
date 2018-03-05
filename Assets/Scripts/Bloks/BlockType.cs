@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.Bloks
 {
-    public enum Type
+    public enum BlockType
     {
         Red,
         Green,
