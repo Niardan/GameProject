@@ -233,10 +233,14 @@
     <Compile Include="Assets\Scripts\Bloks\Block.cs" />
     <Compile Include="Assets\Scripts\Bloks\BlockGamePoleController.cs" />
     <Compile Include="Assets\Scripts\Bloks\BlockPoint.cs" />
-    <Compile Include="Assets\Scripts\Bloks\BlockPool.cs" />
+    <Compile Include="Assets\Scripts\Bloks\BlocksGenerator.cs" />
+    <Compile Include="Assets\Scripts\Bloks\Controllers\BlockController.cs" />
+    <Compile Include="Assets\Scripts\Bloks\Controllers\BlockGameController.cs" />
+    <Compile Include="Assets\Scripts\Bloks\Controllers\BlockGameGenerator.cs" />
     <Compile Include="Assets\Scripts\Bloks\Side.cs" />
     <Compile Include="Assets\Scripts\Bloks\BlockType.cs" />
     <Compile Include="Assets\Scripts\Bloks\Views\BlockGameView.cs" />
+    <Compile Include="Assets\Scripts\Bloks\Views\BlockPoolView.cs" />
     <Compile Include="Assets\Scripts\Bloks\Views\BlockView.cs" />
     <Compile Include="Assets\Scripts\Mining\Controllers\GameMiningController.cs" />
     <Compile Include="Assets\Scripts\Mining\Controllers\GamePole\BallController.cs" />

@@ -4,19 +4,22 @@
     public class Block
     {
         private BlockPoint _point;
-        private readonly Side _side;
-        private readonly BlockPoint _sidePoint;
-        private readonly BlockType _type;
+        private Side _side;
+        private BlockPoint _sidePoint;
+        private readonly string _type;
         private bool _moved;
 
         public event MoveBlockHandler ClickTryMove;
         public event MoveBlockHandler TryMove;
         public event MoveBlockHandler Move;
-        public Block(BlockPoint point, Side side, BlockType type)
+        public Block(string type)
         {
-            _point = point;
-            _side = side;
             _type = type;
+        }
+
+        public void Initiation(Side side)
+        {
+            _side = side;
             switch (side)
             {
                 case Side.Down:
@@ -37,10 +40,18 @@
             }
         }
 
+        
+
         public bool Moved
         {
             get { return _moved; }
             set { _moved = value; }
+        }
+
+        public BlockPoint Position
+        {
+            get { return _point; }
+            set { _point = value; }
         }
 
         public void Update()

@@ -13,6 +13,7 @@ namespace Assets.Scripts.ViewDescription
         private List<string> _types = new List<string>();
         protected override void DoAfterSerialize()
         {
+            _types.Clear();
             foreach (var sprite in this)
             {
                 _sprites[sprite.TypeBlock] = sprite.Sprite;
