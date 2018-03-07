@@ -23,11 +23,11 @@
 
         public BlockPoint Add(BlockPoint point)
         {
-            return new BlockPoint(_x + point.X, _y + point.X);
+            return new BlockPoint(_x + point.X, _y + point.Y);
         }
         public BlockPoint Rem(BlockPoint point)
         {
-            return new BlockPoint(_x - point.X, _y - point.X);
+            return new BlockPoint(_x - point.X, _y - point.Y);
         }
     }
 }

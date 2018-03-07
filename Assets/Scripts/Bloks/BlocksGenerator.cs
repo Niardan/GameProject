@@ -7,12 +7,14 @@ using Assets.Scripts.ViewDescription;
 
 namespace Assets.Scripts.Bloks
 {
+    public delegate void BlockViewHandler (BlockView blockView);
     public class BlocksGenerator
     {
         private readonly BlockPoolView _blockPool;
         private readonly BlockSpritesViewDescription _spritesViewDescription;
         private readonly Random _rand = new Random();
         private readonly Stack<BlockController> _blocks = new Stack<BlockController>();
+        public event BlockViewHandler ChangeBlockPrewiew;
 
         public BlocksGenerator(BlockPoolView blockPool, BlockSpritesViewDescription spritesViewDescription)
         {
@@ -28,8 +30,15 @@ namespace Assets.Scripts.Bloks
             {
                 _blocks.Push(GenBlock());
             }
-
+            CallChangeBlockPrewiew(CurrentBlock);
+            block.View.SetActive(true);
             return block;
+        }
+
+        public void SetBlock(BlockController block)
+        {
+            block.View.SetActive(false);
+            _blocks.Push(block);
         }
 
         public BlockController CurrentBlock { get { return _blocks.Peek(); } }
@@ -37,11 +46,10 @@ namespace Assets.Scripts.Bloks
         private BlockController GenBlock()
         {
             string typeBlock = GetRandomTypeBlock();
-            Block block = new Block(typeBlock);
             var blockView = _blockPool.FreeBlock;
             blockView.Image.sprite = _spritesViewDescription.GetSprite(typeBlock);
 
-            return new BlockController(blockView, block);
+            return new BlockController(blockView, typeBlock);
         }
 
         private string GetRandomTypeBlock()
@@ -50,5 +58,12 @@ namespace Assets.Scripts.Bloks
             return _spritesViewDescription.GetType(index);
         }
 
+        private void CallChangeBlockPrewiew(BlockController block)
+        {
+            if (ChangeBlockPrewiew != null)
+            {
+                ChangeBlockPrewiew(block.View);
+            }
+        }
     }
 }

@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Assets.Scripts.Views.UI.Common
+namespace Assets.Scripts.Mining.Views
 {
-    public class UIPointerObject : SimpleView, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
+    public class UiPointerObject : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
     {
         public event Action<PointerEventData> EventPointerClick;
         public event Action<PointerEventData> EventPointerDown;

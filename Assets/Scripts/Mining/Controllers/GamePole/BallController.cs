@@ -58,6 +58,7 @@ namespace Assets.Scripts.Mining.Controllers.GamePole
 			_yPosition = position.Y;
 			_isChanged = true;
 		}
+
 		public void BallSetPosition(BallPoint position)
 		{
 			_xPositinon = position.X;

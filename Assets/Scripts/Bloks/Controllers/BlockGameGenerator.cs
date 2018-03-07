@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Bloks.Controllers
 {
+    public delegate void BlockHandler(BlockController block);
     public class BlockGameGenerator
     {
         private readonly BlockController[,] _blocks;
@@ -13,6 +14,9 @@ namespace Assets.Scripts.Bloks.Controllers
         private readonly BlocksGenerator _blocksGenerator;
         private BlockSpritesViewDescription _spritesViewDescription;
         private IDictionary<Side, Sprite> _sideSprites;
+
+        public event BlockHandler AddBlock;
+
         public BlockGameGenerator(BlockController[,] blocks, int borderGamePole, int weightGamePole, int heightGamePole, BlocksGenerator blocksGenerator, BlockSpritesViewDescription spritesViewDescription, IDictionary<Side, Sprite> sideSprites)
         {
             _blocks = blocks;
@@ -26,16 +30,29 @@ namespace Assets.Scripts.Bloks.Controllers
 
         private void GenBlock(int x, int y)
         {
-            var block = _blocksGenerator.GetBlock();
-            block.SetPosition(new BlockPoint(x, y));
-            IsMoved(block);
-            var side = GetSide(x, y);
-            block.Block.Initiation(side);
-            block.View.Arrow.sprite = _sideSprites[side];
-            _blocks[x, y] = block;
+            if (_blocks[x, y] == null)
+            {
+                var block = _blocksGenerator.GetBlock();
+                block.SetPosition(new BlockPoint(x, y));
+                IsMoved(block);
+                var side = GetSide(x, y);
+                block.Initiation(side);
+                if (side != Side.Null)
+                {
+                    block.View.Arrow.enabled = true;
+                    block.View.Arrow.sprite = _sideSprites[side];
+                }
+                else
+                {
+                    block.View.Arrow.enabled = false;
+                }
+
+                _blocks[x, y] = block;
+                CallAddBlock(block);
+            }
         }
 
-        public void GenerateStateBorder()
+        public void GenerateStartBorder()
         {
             for (int j = _borderGamePole; j < _heightGamePole - _borderGamePole; j++)
             {
@@ -61,6 +78,26 @@ namespace Assets.Scripts.Bloks.Controllers
                     GenBlock(i, j);
                 }
             }
+
+            GenBlock(_weightGamePole / 2, _heightGamePole / 2);
+        }
+
+        public void GenerateStateBorder()
+        {
+            for (int j = _borderGamePole; j < _heightGamePole - _borderGamePole; j++)
+            {
+                GenBlock(0, j);
+                GenBlock(_weightGamePole - 1, j);
+
+            }
+
+            for (int i = _borderGamePole; i < _weightGamePole - _borderGamePole; i++)
+            {
+                GenBlock(i, 0);
+                GenBlock(i, _heightGamePole - 1);
+            }
+
+            GenBlock(_weightGamePole / 2, _heightGamePole / 2);
         }
 
         private Side GetSide(int x, int y)
@@ -79,7 +116,7 @@ namespace Assets.Scripts.Bloks.Controllers
                 return Side.Down;
             }
 
-            if (y >= _weightGamePole - _heightGamePole)
+            if (y >= _heightGamePole - _borderGamePole)
             {
                 return Side.Up;
             }
@@ -87,17 +124,25 @@ namespace Assets.Scripts.Bloks.Controllers
             return Side.Null;
         }
 
-        private void IsMoved(BlockController block)
+        public void IsMoved(BlockController block)
         {
             var x = block.Position.X;
             var y = block.Position.Y;
             if (x == _borderGamePole - 1 || y == _borderGamePole - 1 || x == _weightGamePole - _borderGamePole || y == _heightGamePole - _borderGamePole)
             {
-                block.Block.Moved = false;
+                block.Moved = false;
             }
             else
             {
-                block.Block.Moved = true;
+                block.Moved = true;
+            }
+        }
+
+        private void CallAddBlock(BlockController block)
+        {
+            if (AddBlock != null)
+            {
+                AddBlock(block);
             }
         }
 

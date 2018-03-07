@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Assets.Scripts.Bloks.Controllers;
 using Assets.Scripts.ViewDescription;
 using UnityEngine;
@@ -18,6 +19,8 @@ namespace Assets.Scripts.Bloks.Views
         [SerializeField] private BlockView _blockViewPrefab;
         [SerializeField] private BlockPoolView _poolView;
 
+        [SerializeField] private BlockView _previewBlock;
+
 
         private BlockGameController _gameController;
 
@@ -30,7 +33,17 @@ namespace Assets.Scripts.Bloks.Views
             _sideSprites.Add(Side.Right, _rightArrowSprite);
             _sideSprites.Add(Side.Up, _upArrowSprite);
             _sideSprites.Add(Side.Null, _nullArrowSprite);
-            _gameController = new BlockGameController(_poolView, _sideSprites, _spritesViewDescription);
+            _gameController = new BlockGameController(_poolView, _sideSprites, _spritesViewDescription, _previewBlock);
+            StartCoroutine(UpdateGame());
+        }
+
+        public IEnumerator UpdateGame()
+        {
+            while (true)
+            {
+                yield return new WaitForEndOfFrame();
+                _gameController.UpdateGame();
+            }
         }
 
     }

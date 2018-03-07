@@ -7,7 +7,7 @@ namespace Assets.Scripts.Bloks.Views
     public class BlockView : MonoBehaviour
     {
         [SerializeField] private RectTransform _block;
-        [SerializeField] private SidePointerObject _uiPointerObject;
+        [SerializeField] private UiPointerObject _uiPointerObject;
         [SerializeField] private MoveAnimator _moveAnimator;
         [SerializeField] private Image _image;
         [SerializeField] private Image _arrow;
@@ -17,7 +17,7 @@ namespace Assets.Scripts.Bloks.Views
         [SerializeField] private float _sizeCell;
 
         public RectTransform Block { get { return _block; } }
-        public SidePointerObject PointerObject { get { return _uiPointerObject; } }
+        public UiPointerObject PointerObject { get { return _uiPointerObject; } }
         public MoveAnimator MoveAnimator { get { return _moveAnimator; } }
         public Image Image { get { return _image; } }
         public Image Arrow { get { return _arrow; } }
@@ -32,7 +32,14 @@ namespace Assets.Scripts.Bloks.Views
         {
             var x = point.X * _sizeCell;
             var y = -point.Y * _sizeCell;
-            _block.anchoredPosition = new Vector2(x,y);
+            _block.anchoredPosition = new Vector2(x, y);
+        }
+
+        public void MoveTo(BlockPoint point)
+        {
+            var x = point.X * _sizeCell;
+            var y = -point.Y * _sizeCell;
+            MoveAnimator.MoveTo(new Vector2(x, y));
         }
 
         public void SetActive(bool active)

@@ -1,6 +1,5 @@
 ﻿using System.Net.Mime;
 using Assets.Scripts.Mining.Views;
-using Assets.Scripts.Views.UI.Common;
 using UnityEngine;
 using UnityEngine.UI;
 

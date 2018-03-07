@@ -1,12 +1,11 @@
 ﻿using Assets.Scripts.Mining.Controllers.GamePole;
-using Assets.Scripts.Views.UI.Common;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Mining.Views
 {
     public delegate void BallMoveSideHandler(MoveSide side);
-    public class SidePointerObject : UIPointerObject
+    public class SidePointerObject : UiPointerObject
     {
         public event BallMoveSideHandler BallMoveSide;
         private Vector2 _clickPosition;

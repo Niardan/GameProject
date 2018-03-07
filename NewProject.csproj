@@ -230,13 +230,14 @@
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Scripts\Basic\IIdentified.cs" />
     <Compile Include="Assets\Scripts\Basic\ISceneView.cs" />
-    <Compile Include="Assets\Scripts\Bloks\Block.cs" />
     <Compile Include="Assets\Scripts\Bloks\BlockGamePoleController.cs" />
     <Compile Include="Assets\Scripts\Bloks\BlockPoint.cs" />
     <Compile Include="Assets\Scripts\Bloks\BlocksGenerator.cs" />
     <Compile Include="Assets\Scripts\Bloks\Controllers\BlockController.cs" />
     <Compile Include="Assets\Scripts\Bloks\Controllers\BlockGameController.cs" />
     <Compile Include="Assets\Scripts\Bloks\Controllers\BlockGameGenerator.cs" />
+    <Compile Include="Assets\Scripts\Bloks\Controllers\BlockStateController.cs" />
+    <Compile Include="Assets\Scripts\Bloks\Controllers\DestroyBlock.cs" />
     <Compile Include="Assets\Scripts\Bloks\Side.cs" />
     <Compile Include="Assets\Scripts\Bloks\BlockType.cs" />
     <Compile Include="Assets\Scripts\Bloks\Views\BlockGameView.cs" />
@@ -267,7 +268,7 @@
     <Compile Include="Assets\Scripts\Mining\Views\MoveAnimator.cs" />
     <Compile Include="Assets\Scripts\Mining\Views\SidePointerObject.cs" />
     <Compile Include="Assets\Scripts\Mining\Views\SimpleView.cs" />
-    <Compile Include="Assets\Scripts\Mining\Views\UIPointerObject.cs" />
+    <Compile Include="Assets\Scripts\Mining\Views\UiPointerObject.cs" />
     <Compile Include="Assets\Scripts\Unils\Now.cs" />
     <Compile Include="Assets\Scripts\Unils\Timer.cs" />
     <Compile Include="Assets\Scripts\ViewDescription\BlockSpritesViewDescription.cs" />
