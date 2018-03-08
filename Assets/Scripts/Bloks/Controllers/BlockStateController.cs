@@ -67,7 +67,7 @@ namespace Assets.Scripts.Bloks.Controllers
         private void StateDestroy()
         {
             _destroyBlock.UpdateDestroy();
-            CurrentState = null;
+            CurrentState = StateUpdate;
         }
 
         private void OnEndMove()

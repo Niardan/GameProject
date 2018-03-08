@@ -32,7 +32,7 @@ namespace Assets.Scripts.Bloks.Controllers
             _blocks = new BlockController[_weightGamePole, _heightGamePole];
             _blockGameGenerator = new BlockGameGenerator(_blocks, _borderGamePole, _weightGamePole, _heightGamePole, _blocksGenerator, _spritesViewDescription, _sideSprites);
             _blockGamePoleController = new BlockGamePoleController(_blocks, _weightGamePole, _heightGamePole, _borderGamePole, _blockGameGenerator);
-            _destroyBlock = new DestroyBlock(_blocksGenerator, _blocks, _blockGameGenerator);
+            _destroyBlock = new DestroyBlock(_blocksGenerator, _blocks, _blockGameGenerator, _blockPool);
             _blockStateController = new BlockStateController(_blockGameGenerator, _blockGamePoleController, _destroyBlock);
           
         }

@@ -28,7 +28,7 @@ namespace Assets.Scripts.Bloks.Controllers
             _sideSprites = sideSprites;
         }
 
-        private void GenBlock(int x, int y)
+        private void GenBlock(int x, int y, bool started = true)
         {
             if (_blocks[x, y] == null)
             {
@@ -48,6 +48,7 @@ namespace Assets.Scripts.Bloks.Controllers
                 }
 
                 _blocks[x, y] = block;
+                block.IsStarted = started;
                 CallAddBlock(block);
             }
         }
@@ -79,7 +80,7 @@ namespace Assets.Scripts.Bloks.Controllers
                 }
             }
 
-            GenBlock(_weightGamePole / 2, _heightGamePole / 2);
+            GenBlock(_weightGamePole / 2, _heightGamePole / 2, false);
         }
 
         public void GenerateStateBorder()
@@ -88,7 +89,6 @@ namespace Assets.Scripts.Bloks.Controllers
             {
                 GenBlock(0, j);
                 GenBlock(_weightGamePole - 1, j);
-
             }
 
             for (int i = _borderGamePole; i < _weightGamePole - _borderGamePole; i++)
@@ -96,8 +96,6 @@ namespace Assets.Scripts.Bloks.Controllers
                 GenBlock(i, 0);
                 GenBlock(i, _heightGamePole - 1);
             }
-
-            GenBlock(_weightGamePole / 2, _heightGamePole / 2);
         }
 
         private Side GetSide(int x, int y)

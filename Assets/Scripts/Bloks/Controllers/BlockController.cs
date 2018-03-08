@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Bloks.Views;
+using UnityEngine;
 
 namespace Assets.Scripts.Bloks.Controllers
 {
@@ -59,6 +60,7 @@ namespace Assets.Scripts.Bloks.Controllers
 
         public void Destroy()
         {
+            Debug.Log("Destroy");
             CallDestroyed();
         }
 
@@ -96,6 +98,11 @@ namespace Assets.Scripts.Bloks.Controllers
         {
             get { return _isStarted; }
             set { _isStarted = value; }
+        }
+
+        public string Type
+        {
+            get { return _type; }
         }
 
         public void Update()

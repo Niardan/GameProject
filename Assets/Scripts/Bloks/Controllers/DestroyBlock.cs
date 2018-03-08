@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.Bloks.Views;
+using Assets.Scripts.Mining.Views;
 
 namespace Assets.Scripts.Bloks.Controllers
 {
@@ -8,11 +10,13 @@ namespace Assets.Scripts.Bloks.Controllers
         private readonly BlockController[,] _blocks;
 
         private HashSet<BlockController> _changedBlock = new HashSet<BlockController>();
+        private BlockPoolView _blockPool;
 
-        public DestroyBlock(BlocksGenerator blocksGenerator, BlockController[,] blocks, BlockGameGenerator blockGameGenerator)
+        public DestroyBlock(BlocksGenerator blocksGenerator, BlockController[,] blocks, BlockGameGenerator blockGameGenerator, BlockPoolView blockPool)
         {
             _blocksGenerator = blocksGenerator;
             _blocks = blocks;
+            _blockPool = blockPool;
             blockGameGenerator.AddBlock += _blockGameGenerator_AddBlock;
         }
 
@@ -37,7 +41,10 @@ namespace Assets.Scripts.Bloks.Controllers
         {
             foreach (var block in _changedBlock)
             {
-                CheckBlock(block);
+                if (!block.IsStarted)
+                {
+                    CheckBlock(block);
+                }
             }
             _changedBlock.Clear();
         }
@@ -45,11 +52,14 @@ namespace Assets.Scripts.Bloks.Controllers
         private void CheckBlock(BlockController block)
         {
             var blocks = new List<BlockController>();
-            if (CheckRecursion(block, blocks, 0) > 3)
+            int count = CheckRecursion(block, blocks, 1);
+            if (count >= 3)
             {
                 foreach (var dblock in blocks)
                 {
                     dblock.Destroy();
+                    _blocks[dblock.Position.X, dblock.Position.Y] = null;
+                    _blockPool.FreeBlock = dblock.View;
                 }
             }
         }
@@ -61,27 +71,29 @@ namespace Assets.Scripts.Bloks.Controllers
             int y = block.Position.Y;
             var newBlock = _blocks[x, y - 1];
 
-            if (newBlock != null && !newBlock.IsStarted)
+            if (newBlock != null && newBlock.Type == block.Type && !blocks.Contains(newBlock) && !newBlock.IsStarted)
             {
+                count++;
                 count = CheckRecursion(newBlock, blocks, count);
             }
             newBlock = _blocks[x, y + 1];
-            if (newBlock != null && !newBlock.IsStarted)
+            if (newBlock != null && newBlock.Type == block.Type && !blocks.Contains(newBlock) && !newBlock.IsStarted)
             {
+                count++;
                 count = CheckRecursion(newBlock, blocks, count);
             }
             newBlock = _blocks[x - 1, y];
-            if (newBlock != null && !newBlock.IsStarted)
+            if (newBlock != null && newBlock.Type == block.Type && !blocks.Contains(newBlock) && !newBlock.IsStarted)
             {
+                count++;
                 count = CheckRecursion(newBlock, blocks, count);
             }
             newBlock = _blocks[x + 1, y];
-            if (newBlock != null && !newBlock.IsStarted)
+            if (newBlock != null && newBlock.Type == block.Type && !blocks.Contains(newBlock) && !newBlock.IsStarted)
             {
+                count++;
                 count = CheckRecursion(newBlock, blocks, count);
             }
-
-            count++;
             return count;
         }
     }
