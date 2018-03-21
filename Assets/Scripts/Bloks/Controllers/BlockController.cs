@@ -15,6 +15,7 @@ namespace Assets.Scripts.Bloks.Controllers
         private readonly string _type;
         private bool _moved;
         private bool _allowMove;
+        private bool _reverceMove;
 
         private bool _isStarted = true;
 
@@ -22,6 +23,7 @@ namespace Assets.Scripts.Bloks.Controllers
         public event MoveBlockHandler TryMove;
         public event MoveBlockHandler Move;
         public event BlockHandler Destroyed;
+        public event MoveBlockHandler ReverceMove;
 
         public BlockController(BlockView blockView, string type)
         {
@@ -136,7 +138,15 @@ namespace Assets.Scripts.Bloks.Controllers
                 _blockView.MoveTo(_position);
                 CallMove();
             }
-           
+            else if (_reverceMove)
+            {
+                _reverceMove = false;
+                _oldPosition = _position;
+                _position = GetRevercePoint();
+                _blockView.MoveTo(_position);
+                CallMove();
+            }
+            
         }
 
         private void CallTryMove()
@@ -144,6 +154,15 @@ namespace Assets.Scripts.Bloks.Controllers
             if (TryMove != null)
             {
                 TryMove(this, _side, GetNewPoint());
+            }
+        }
+
+        public void Reverce()
+        {
+            _reverceMove = true;
+            if (TryMove != null)
+            {
+                CallReverce();
             }
         }
 
@@ -163,6 +182,14 @@ namespace Assets.Scripts.Bloks.Controllers
             }
         }
 
+        private void CallReverce()
+        {
+            if (ReverceMove != null)
+            {
+                ReverceMove(this, _side, GetRevercePoint());
+            }
+        }
+
         private void CallDestroyed()
         {
             if (Destroyed != null)
@@ -174,6 +201,11 @@ namespace Assets.Scripts.Bloks.Controllers
         private BlockPoint GetNewPoint()
         {
             return _position.Add(_sidePoint);
+        }
+
+        private BlockPoint GetRevercePoint()
+        {
+            return _position.Rem(_sidePoint);
         }
 
     }

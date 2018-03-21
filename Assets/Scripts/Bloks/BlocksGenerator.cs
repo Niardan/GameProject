@@ -39,6 +39,7 @@ namespace Assets.Scripts.Bloks
         {
             block.View.SetActive(false);
             _blocks.Push(block);
+            CallChangeBlockPrewiew(CurrentBlock);
         }
 
         public BlockController CurrentBlock { get { return _blocks.Peek(); } }

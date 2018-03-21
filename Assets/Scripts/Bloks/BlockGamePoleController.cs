@@ -15,8 +15,6 @@ namespace Assets.Scripts.Bloks
 
         private int _moveCount = 0;
 
-        private bool _isChanged;
-
         private BlockGameGenerator _blockGameGenerator;
 
         public event Action EndMove;
@@ -31,11 +29,6 @@ namespace Assets.Scripts.Bloks
             _heightGamePole = heightGamePole;
             _blocks = blocks;
             _blockGameGenerator.AddBlock += AddBlock;
-        }
-
-        public bool IsChanged
-        {
-            get { return _isChanged; }
         }
 
         private void AddBlock(BlockController block)
@@ -69,22 +62,22 @@ namespace Assets.Scripts.Bloks
         {
             if (_blocks[newPoint.X, newPoint.Y] == null)
             {
+                _blocks[sender.Position.X, sender.Position.Y] = null;
+                _blocks[newPoint.X, newPoint.Y] = sender;
                 sender.AcceptMove();
-                _isChanged = true;
                 _moveCount++;
             }
         }
 
         private void OnMove(BlockController sender, Side side, BlockPoint oldPoint)
         {
-            _blocks[oldPoint.X, oldPoint.Y] = null;
-            _blocks[sender.Position.X, sender.Position.Y] = sender;
+         
             _blockGameGenerator.IsMoved(sender);
         }
 
         private void OnClickMove(BlockController sender, Side side, BlockPoint newPoint)
         {
-            if (_blocks[newPoint.X, newPoint.Y] == null && AllowMoved(sender))
+            if (_blocks[newPoint.X, newPoint.Y] == null && AllowClickMoved(sender))
             {
                 sender.Moved = true;
                 sender.IsStarted = false;
@@ -93,7 +86,7 @@ namespace Assets.Scripts.Bloks
             }
         }
 
-        private bool AllowMoved(BlockController block)
+        private bool AllowClickMoved(BlockController block)
         {
             int x = block.Position.X;
             int y = block.Position.Y;
